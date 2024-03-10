@@ -1,42 +1,33 @@
-package com.abutua.sellerregister.entities;
+package com.abutua.sellerregister.DTOs;
 
-import com.abutua.sellerregister.DTOs.SellerResponse;
+import com.abutua.sellerregister.entities.Seller;
 
-public class Seller {
+public class SellerRequest {
 
-    private Long id;
     private String name;
     private Double salary;
     private Double bonus;
     private String gender;
 
     // Empty Constructor
-    public Seller() {
-        
+    public SellerRequest(){
+
     }
 
-    // Constructor without the id
-    public Seller(String name, Double salary, Double bonus, String gender) {
+    // Constructor
+    public SellerRequest(String name, Double salary, Double bonus, String gender) {
         this.name = name;
         this.salary = salary;
         this.bonus = bonus;
         this.gender = gender;
     }
 
-    // Converts from SellerEntity to SellerResponse
-    public SellerResponse toSellerResponse(){
-        return new SellerResponse(id, name, salary, bonus, gender);
+    // Converts to SellerRequest to SellerEntity
+    public Seller toSellerEntity(){
+        return new Seller(name, salary, bonus, gender);
     }
 
     // Setters and Getters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
