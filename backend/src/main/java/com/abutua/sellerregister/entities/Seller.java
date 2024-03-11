@@ -2,12 +2,31 @@ package com.abutua.sellerregister.entities;
 
 import com.abutua.sellerregister.DTOs.SellerResponse;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="SELLER_TBL")
 public class Seller {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 255)
     private String name;
+
+    @Column(nullable = false)
     private Double salary;
+
+    @Column(nullable = false)
     private Double bonus;
+
+    @Column(nullable = false, length = 10)
     private String gender;
 
     // Empty Constructor
