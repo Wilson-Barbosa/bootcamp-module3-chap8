@@ -1,5 +1,7 @@
 package com.abutua.sellerregister.entities;
 
+import java.io.Serializable;
+
 import com.abutua.sellerregister.DTOs.SellerResponse;
 
 import jakarta.persistence.Column;
@@ -10,8 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="SELLER_TBL")
-public class Seller {
+@Table(name = "SELLER_TBL")
+public class Seller implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +33,7 @@ public class Seller {
 
     // Empty Constructor
     public Seller() {
-        
+
     }
 
     // Constructor without the id
@@ -43,7 +45,7 @@ public class Seller {
     }
 
     // Converts from SellerEntity to SellerResponse
-    public SellerResponse toSellerResponse(){
+    public SellerResponse toSellerResponse() {
         return new SellerResponse(id, name, salary, bonus, gender);
     }
 
@@ -86,6 +88,37 @@ public class Seller {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Seller other = (Seller) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+        return "Seller [id=" + id + ", name=" + name + ", salary=" + salary + ", bonus=" + bonus + ", gender=" + gender
+                + "]";
     }
 
 }
