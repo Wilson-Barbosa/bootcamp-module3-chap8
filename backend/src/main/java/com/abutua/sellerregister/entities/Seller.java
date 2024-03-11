@@ -36,6 +36,16 @@ public class Seller implements Serializable {
 
     }
 
+    
+    // Full Constructor
+    public Seller(Long id, String name, Double salary, Double bonus, String gender) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.bonus = bonus;
+        this.gender = gender;
+    }
+
     // Constructor without the id
     public Seller(String name, Double salary, Double bonus, String gender) {
         this.name = name;
