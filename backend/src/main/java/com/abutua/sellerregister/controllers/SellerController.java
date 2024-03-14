@@ -3,9 +3,9 @@ package com.abutua.sellerregister.controllers;
 import java.net.URI;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,7 +66,7 @@ public class SellerController {
 
     // Endpoint to save a new seller
     @PostMapping()
-    public ResponseEntity<SellerResponse> saveSeller(@RequestBody SellerRequest seller){
+    public ResponseEntity<SellerResponse> saveSeller(@Validated @RequestBody SellerRequest seller){
         
         // Calls the save method
         sellerService.save(seller);
