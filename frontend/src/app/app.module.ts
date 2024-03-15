@@ -8,6 +8,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterSellerComponent } from './components/register-seller/register-seller.component';
 import { SellersListComponent } from './components/sellers-list/sellers-list.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SellersListComponent } from './components/sellers-list/sellers-list.com
     NavbarComponent,
     FooterComponent,
     RegisterSellerComponent,
-    SellersListComponent
+    SellersListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
