@@ -12,7 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RegisterSellerComponent } from './components/register-seller/register-seller.component';
 import { SellersListComponent } from './components/sellers-list/sellers-list.component';
 import { HomeComponent } from './components/home/home.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

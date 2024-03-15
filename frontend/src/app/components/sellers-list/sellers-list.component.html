@@ -13,11 +13,11 @@
     <form>
         <div class="row">
             <div class="col-3">
-                <input type="text" class="form-control" id="name" placeholder="Enter ID">
+                <input type="number" class="form-control" [(ngModel)]="idSellerToSearch" name="idSellerToSearch" placeholder="Enter ID">
             </div>
 
             <div class="col-2">
-                <button class="btn btn-success" >Search ID</button>
+                <button type="button" class="btn btn-success" (click)="displaySingleSeller()" >Search ID</button>
             </div>
 
             <div class="col-1">
@@ -25,21 +25,19 @@
             </div>
 
             <div class="col-2">
-                <button class="btn btn-primary">Display All</button>
+                <button type="button" class="btn btn-primary" (click)="displaySellers()">Display All</button>
             </div>
         </div>
 
     </form>
 
-    <!-- Divider -->
-    <div class="my-5"><hr></div>
-
-
     <!-- Seller Information -->
-    <div class="mb-5">
-        <p class="fs-5">Results:</p>
+    <div class="my-5" *ngIf="showResults == true">
+        <p class="fs-4">Results:</p>
 
-        <table class="table table-striped">
+        <p class="text-danger fs-5" *ngIf="sellerList.length == 0">No Seller was found</p>
+
+        <table class="table table-striped" *ngIf="sellerList.length != 0">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -50,26 +48,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Wilson Barbosa</td>
-                    <td>$ 1,450.00</td>
-                    <td>78%</td>
-                    <td>Male</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Marie Curie</td>
-                    <td>$ 4,200.00</td>
-                    <td>50.2%</td>
-                    <td>Female</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Alexandre Yersin</td>
-                    <td>$ 3,000.00</td>
-                    <td>10.5%</td>
-                    <td>Male</td>
+                <tr *ngFor="let seller of sellerList">
+                    <th>{{ seller.id }}</th>
+                    <td>{{ seller.name }}</td>
+                    <td>{{ seller.salary | currency}} </td>
+                    <td>{{ seller.bonus }}%</td>
+                    <td>{{ seller.gender }}</td>
                 </tr>
             </tbody>
         </table>
