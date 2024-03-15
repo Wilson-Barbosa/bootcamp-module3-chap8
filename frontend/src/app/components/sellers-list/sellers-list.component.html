@@ -1,0 +1,80 @@
+<!-- Register Sellers Component -->
+<app-register-seller></app-register-seller>
+
+<!-- Divider -->
+<div class="container my-5"><hr></div>
+
+<!-- Display Sellers Component -->
+<div class="container">
+
+    <p class="fs-2">Search for a Seller</p>
+
+    <!-- Search Form -->
+    <form>
+        <div class="row">
+            <div class="col-3">
+                <input type="text" class="form-control" id="name" placeholder="Enter ID">
+            </div>
+
+            <div class="col-2">
+                <button class="btn btn-success" >Search ID</button>
+            </div>
+
+            <div class="col-1">
+                <span>Or</span>
+            </div>
+
+            <div class="col-2">
+                <button class="btn btn-primary">Display All</button>
+            </div>
+        </div>
+
+    </form>
+
+    <!-- Divider -->
+    <div class="my-5"><hr></div>
+
+
+    <!-- Seller Information -->
+    <div>
+        <p class="fs-5">Results:</p>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Bonus</th>
+                    <th scope="col">Gender</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Wilson Barbosa</td>
+                    <td>$ 1,450.00</td>
+                    <td>78%</td>
+                    <td>Male</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Marie Curie</td>
+                    <td>$ 4,200.00</td>
+                    <td>50.2%</td>
+                    <td>Female</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Alexandre Yersin</td>
+                    <td>$ 3,000.00</td>
+                    <td>10.5%</td>
+                    <td>Male</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+

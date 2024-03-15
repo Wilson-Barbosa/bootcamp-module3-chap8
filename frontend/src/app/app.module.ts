@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterSellerComponent } from './components/register-seller/register-seller.component';
+import { SellersListComponent } from './components/sellers-list/sellers-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    RegisterSellerComponent
+    RegisterSellerComponent,
+    SellersListComponent
   ],
   imports: [
     BrowserModule,
