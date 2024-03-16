@@ -31,13 +31,19 @@
                     <label for="bonus" class="form-label">Bonus:</label>
                     <input type="number" class="form-control" id="bonus" formControlName="bonus">
                 </div>
+
+                <div class="col-2 ms-2 mt-4" *ngIf="sellerForm.value.id">
+                    <label for="sellerId" class="form-label">ID:</label>
+                    <input type="number" class="form-control" id="sellerId" formControlName="id" readonly>
+                </div>
+
             </div>
 
             <!-- Button -->
             <div class="row">
                 <div>
-                    <button type="submit" class="btn btn-success mt-4 me-4" (click)="saveSeller()">Save</button>
-                    <button class="btn btn-danger mt-4">Cancel</button>
+                    <button type="submit" class="btn btn-success mt-4 me-4" (click)="save()">Save</button>
+                    <button type="button" class="btn btn-danger mt-4" (click)="resetForm()">Cancel</button>
                 </div>
             </div>
 

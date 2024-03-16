@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Seller } from 'src/app/Interfaces/Seller';
+import { SelerWithId } from 'src/app/Interfaces/SelerWithId';
 import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
@@ -9,20 +10,23 @@ import { SellerService } from 'src/app/services/seller.service';
 })
 export class SellersListComponent {
 
+    updatedSeller: SelerWithId = {} as SelerWithId;  // Attribute that holds data of a single seller
 
-    sellerList: Seller[] = [];      // Array that stores the list os sellers to be displayed
+    sellerList: SelerWithId[] = [];      // Array that stores the list os sellers to be displayed
     showResults: boolean = false;   // Attribute that displays or hides the resultsContainer
     idSellerToSearch!: number;      // Attribute that holds a seller's ID to be searched
+    
 
     // Injecting the HTTP service via constructor
     constructor(private sellerService: SellerService) { }
 
-    // Method that calls the service method to display all sellers
+
+    // Method that calls the service to display all sellers
     public displaySellers(): void {
-        this.sellerService.getSellers().subscribe(
+        this.sellerService.getAllSellers().subscribe(
             {
                 // If the request is successful then the response is assign to SellersArray
-                next: sellers => { this.sellerList = sellers }
+                next: (sellers) => ( this.sellerList = sellers )
             }
         );
 
@@ -30,23 +34,43 @@ export class SellersListComponent {
         this.showResults = true;
     }
 
-    // Method that calls the service method to display a single seller by its ID
+
+    // Method that calls the service to display a single seller by its ID
     public displaySingleSeller(): void {
 
         // This clears the SellerArray before searching for a new one
         // so thing don't bug out
         this.sellerList = [];
 
-        this.sellerService.getSeller(this.idSellerToSearch).subscribe(
+        this.sellerService.getSellerById(this.idSellerToSearch).subscribe(
             {
                 // If the request is successful it gets pushed to SellerArray
-                next: seller => { this.sellerList.push(seller) }
+                next: seller => ( this.sellerList.push(seller) )
             }
         );
 
         // Display the results for the user
         this.showResults = true;
 
+    }
+
+
+    // Method that calls the service to delete a single seller by its ID
+    public deleteSeller(id: number): void {
+
+        //Add a modal to ask if the user wants to delete it
+
+        this.sellerService.deleteSellerById(id).subscribe();
+
+        // To provide a better user experience the sellerList would be reloaded onto the screen
+        this.displaySellers();
+
+    }
+
+
+    // Method that sends a seller to be updated
+    public sendSellerToUpdate(seller: SelerWithId): void {
+        this.updatedSeller = seller;
     }
 
 }
