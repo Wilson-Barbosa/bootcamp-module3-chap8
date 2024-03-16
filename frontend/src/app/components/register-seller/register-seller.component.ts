@@ -66,7 +66,7 @@ export class RegisterSellerComponent implements OnChanges {
             this.resetForm();
 
             // Resets the clicked button to reset validation
-            this.saveWasClicked = true;
+            this.saveWasClicked = false;
         }
 
 
@@ -77,7 +77,7 @@ export class RegisterSellerComponent implements OnChanges {
     public saveSeller(): void {
 
         // Assigns the values from the form to the Seller attribute
-        Object.assign(this.updatedSeller, this.sellerForm.value);
+        Object.assign(this.seller, this.sellerForm.value);
 
         // Calls the service
         this.sellerService.save(this.seller).subscribe(

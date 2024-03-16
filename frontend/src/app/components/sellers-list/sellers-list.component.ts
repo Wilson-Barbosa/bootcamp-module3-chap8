@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Seller } from 'src/app/Interfaces/Seller';
+import { Component } from '@angular/core';
 import { SelerWithId } from 'src/app/Interfaces/SelerWithId';
 import { SellerService } from 'src/app/services/seller.service';
 
@@ -15,7 +14,7 @@ export class SellersListComponent {
     sellerList: SelerWithId[] = [];      // Array that stores the list os sellers to be displayed
     showResults: boolean = false;   // Attribute that displays or hides the resultsContainer
     idSellerToSearch!: number;      // Attribute that holds a seller's ID to be searched
-    
+
 
     // Injecting the HTTP service via constructor
     constructor(private sellerService: SellerService) { }
@@ -26,7 +25,7 @@ export class SellersListComponent {
         this.sellerService.getAllSellers().subscribe(
             {
                 // If the request is successful then the response is assign to SellersArray
-                next: (sellers) => ( this.sellerList = sellers )
+                next: (sellers) => (this.sellerList = sellers)
             }
         );
 

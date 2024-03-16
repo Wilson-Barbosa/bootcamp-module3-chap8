@@ -37,7 +37,7 @@ export class SellerService {
 
     // Method that sends an HTTP PUT request to update a seller in the database
     public updateSeller(seller: SelerWithId){
-        return this.http.put(`${this.baseUrl}/${seller.id}`, seller); // TODO alter this method later
+        return this.http.put(`${this.baseUrl}/${seller.id}`, seller);
     }
 
 
