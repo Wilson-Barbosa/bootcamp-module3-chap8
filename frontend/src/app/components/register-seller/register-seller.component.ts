@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Seller } from 'src/app/Interfaces/Seller';
 import { SelerWithId } from 'src/app/Interfaces/SelerWithId';
 import { SellerService } from 'src/app/services/seller.service';
@@ -13,42 +13,62 @@ export class RegisterSellerComponent implements OnChanges {
 
     constructor(private sellerService: SellerService) { } // Injects the service
 
-    seller: Seller = {} as Seller; // Empty seller
+     // Empty seller
+    seller: Seller = {} as Seller;
 
+     // Empty Seller with an ID
     @Input()
-    updatedSeller: SelerWithId = {} as SelerWithId; // Empty Seller with an ID
+    updatedSeller: SelerWithId = {} as SelerWithId;
 
+    // Tracks whether or not save was clicked by the user
+    saveWasClicked: boolean = false;
 
     // FormGroup Object containing a list of FormControls
     sellerForm = new FormGroup({
         id: new FormControl(''),
-        name: new FormControl(''),
-        salary: new FormControl(''),
-        bonus: new FormControl(''),
-        gender: new FormControl('')
+        name: new FormControl('', [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(255)
+        ]),
+        salary: new FormControl('', [
+            Validators.required,
+            Validators.min(0)
+        ]),
+        bonus: new FormControl('', [
+            Validators.required,
+            Validators.min(0),
+            Validators.max(100)
+        ]),
+        gender: new FormControl('', [
+            Validators.required
+        ])
     });
 
 
     // When the user clicks on the save button this method is called
     public save(): void {
 
-        // It checks if the seller has an ID
-        if (this.sellerForm.value.id) {
+        // Turns the button click to true for validation
+        this.saveWasClicked = true;
 
-            // If it has an ID then UPDATES
-            this.updateSeller();
-            // alert("UPDATE");
+        // Checks if the form is valid
+        if (this.sellerForm.valid) {
 
-        } else {
+            // Checks if the seller has an ID
+            if (this.sellerForm.value.id) {
+                this.updateSeller(); // If it has an ID then UPDATES
+            } else {
+                this.saveSeller(); // If does not have an ID then SAVES
+            }
 
-            // If does not have an ID then SAVES
-            this.saveSeller();
-            // alert("SAVE");
+            // Clears the form
+            this.resetForm();
 
+            // Resets the clicked button to reset validation
+            this.saveWasClicked = true;
         }
 
-        // Clears the form
-        this.resetForm();
 
     }
 
@@ -117,4 +137,21 @@ export class RegisterSellerComponent implements OnChanges {
         });
     }
 
+
+    // Getter methods to check if there is errors on the form
+    get name(): any {
+        return this.sellerForm.get('name');
+    }
+
+    get salary(): any {
+        return this.sellerForm.get('salary');
+    }
+
+    get bonus(): any {
+        return this.sellerForm.get('bonus');
+    }
+
+    get gender(): any {
+        return this.sellerForm.get('gender');
+    }
 }
