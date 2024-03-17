@@ -57,14 +57,28 @@
                     <td>{{ seller.bonus }}%</td>
                     <td>{{ seller.gender }}</td>
                     <td>
-                        <button (click)="sendSellerToUpdate(seller)" class="me-3"><i class="bi bi-pencil"></i></button>
-                        <button (click)="deleteSeller(seller.id)"><i class="bi bi-trash text-danger"></i></button>
+                        <button class="buttonException me-2" (click)="sendSellerToUpdate(seller)"><i class="bi bi-pencil text-success"></i></button>
+                        <button class="buttonException" (click)="deleteSeller(deleteModal, seller.id)"><i class="bi bi-trash text-danger"></i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
+    <!-- Modal Element -->
+    <ng-template #deleteModal let-modal>
+        <div class="modal-header text-white bg-danger">
+            <h5 class="modal-title ">Confirm deletion</h5>
+        </div>
+        <div class="modal-body">
+            <p class="fs-5">Do you want to remove the Seller #{{sellerId}}?</p>
+            <p class="fs-5">This is an irreverseble action.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="modal.close(true)">Delete</button>
+        </div>
+    </ng-template>
 
 </div>
 

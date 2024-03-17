@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SelerWithId } from 'src/app/Interfaces/SelerWithId';
 import { SellerService } from 'src/app/services/seller.service';
 
@@ -11,13 +12,14 @@ export class SellersListComponent {
 
     updatedSeller: SelerWithId = {} as SelerWithId;  // Attribute that holds data of a single seller
 
-    sellerList: SelerWithId[] = [];      // Array that stores the list os sellers to be displayed
-    showResults: boolean = false;   // Attribute that displays or hides the resultsContainer
-    idSellerToSearch!: number;      // Attribute that holds a seller's ID to be searched
+    sellerList: SelerWithId[] = [];  // Array that stores the list os sellers to be displayed
+    showResults: boolean = false;    // Attribute that displays or hides the resultsContainer
+    idSellerToSearch!: number;       // Attribute that holds a seller's ID to be searched
 
+    sellerId!: number;  // Seller variable that is displayed on the modal
 
     // Injecting the HTTP service via constructor
-    constructor(private sellerService: SellerService) { }
+    constructor(private sellerService: SellerService, private modalService: NgbModal) { }
 
 
     // Method that calls the service to display all sellers
@@ -25,7 +27,7 @@ export class SellersListComponent {
         this.sellerService.getAllSellers().subscribe(
             {
                 // If the request is successful then the response is assign to SellersArray
-                next: (sellers) => (this.sellerList = sellers)
+                next: (sellers) => {this.sellerList = sellers;}
             }
         );
 
@@ -38,32 +40,41 @@ export class SellersListComponent {
     public displaySingleSeller(): void {
 
         // This clears the SellerArray before searching for a new one
-        // so thing don't bug out
+        // so things don't bug out
         this.sellerList = [];
 
         this.sellerService.getSellerById(this.idSellerToSearch).subscribe(
             {
                 // If the request is successful it gets pushed to SellerArray
-                next: seller => ( this.sellerList.push(seller) )
+                next: seller => {this.sellerList.push(seller);}
             }
         );
 
         // Display the results for the user
         this.showResults = true;
-
     }
 
 
     // Method that calls the service to delete a single seller by its ID
-    public deleteSeller(id: number): void {
+    public deleteSeller(modal: any, id: number): void {
+
+        this.sellerId = id;
 
         //Add a modal to ask if the user wants to delete it
+        this.modalService.open(modal).result.then(
+            (confirm) => {
+                if (confirm) {
+                    this.sellerService.deleteSellerById(id).subscribe();
 
-        this.sellerService.deleteSellerById(id).subscribe();
-
-        // To provide a better user experience the sellerList would be reloaded onto the screen
-        this.displaySellers();
-
+                    /*
+                        TODO I have no idea why the method below doesn't get executed
+                        * It should display a new list without the seller deleted, by making another
+                        * Http request, but it doesn't work and I have no idea why
+                    */
+                    this.displaySellers();
+                }
+            }
+        );
     }
 
 

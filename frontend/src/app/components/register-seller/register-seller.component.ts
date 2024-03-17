@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Seller } from 'src/app/Interfaces/Seller';
 import { SelerWithId } from 'src/app/Interfaces/SelerWithId';
 import { SellerService } from 'src/app/services/seller.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-register-seller',
@@ -11,7 +12,7 @@ import { SellerService } from 'src/app/services/seller.service';
 })
 export class RegisterSellerComponent implements OnChanges {
 
-    constructor(private sellerService: SellerService) { } // Injects the service
+    constructor(private sellerService: SellerService, private modalService: NgbModal) {} // Injects the service
 
      // Empty seller
     seller: Seller = {} as Seller;
@@ -47,7 +48,7 @@ export class RegisterSellerComponent implements OnChanges {
 
 
     // When the user clicks on the save button this method is called
-    public save(): void {
+    public save(modal: any): void {
 
         // Turns the button click to true for validation
         this.saveWasClicked = true;
@@ -57,9 +58,9 @@ export class RegisterSellerComponent implements OnChanges {
 
             // Checks if the seller has an ID
             if (this.sellerForm.value.id) {
-                this.updateSeller(); // If it has an ID then UPDATES
+                this.updateSeller(modal); // If it has an ID then UPDATES
             } else {
-                this.saveSeller(); // If does not have an ID then SAVES
+                this.saveSeller(modal); // If does not have an ID then SAVES
             }
 
             // Clears the form
@@ -74,7 +75,7 @@ export class RegisterSellerComponent implements OnChanges {
 
 
     // Methods that gets called when trying to save a seller
-    public saveSeller(): void {
+    public saveSeller(modal: any): void {
 
         // Assigns the values from the form to the Seller attribute
         Object.assign(this.seller, this.sellerForm.value);
@@ -82,7 +83,7 @@ export class RegisterSellerComponent implements OnChanges {
         // Calls the service
         this.sellerService.save(this.seller).subscribe(
             {
-                next: () => (alert("The seller was registered!"))
+                next: () => (this.modalService.open(modal))
             }
         );
 
@@ -90,7 +91,7 @@ export class RegisterSellerComponent implements OnChanges {
 
 
     // Methods that gets called when trying to update a seller
-    public updateSeller(): void {
+    public updateSeller(modal: any): void {
 
         // Assigns the values from the form to the updatedSeller attribute
         Object.assign(this.updatedSeller, this.sellerForm.value);
@@ -99,7 +100,7 @@ export class RegisterSellerComponent implements OnChanges {
         // Calls the service
         this.sellerService.updateSeller(this.updatedSeller).subscribe(
             {
-                next: () => (alert("Seller UPDATED"))
+                next: () => (this.modalService.open(modal))
             }
         )
 
@@ -122,7 +123,7 @@ export class RegisterSellerComponent implements OnChanges {
     ngOnChanges(): void {
 
         /*
-            TODO There is a small error here, as it's my understanding the TS compiler is complaing that
+            TODO There is a small error here. As it's my understanding the TS compiler is complaing that
             * the values from id, salary and bonus maybe undefined, so it cannot convert from undefined to string
             * and the conversion is needed or else an error is thrown. Still, the code compiles and runs, so I
             * decided to let it as it is, maybe it should be changed later...

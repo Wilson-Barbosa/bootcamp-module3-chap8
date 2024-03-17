@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="sellerForm" (ngSubmit)="save()">
+    <form [formGroup]="sellerForm" (ngSubmit)="save(confirmModal)">
         <p class="fs-2">Register a new seller</p>
 
         <div class="row">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class="col-2 ms-2 mt-4" *ngIf="sellerForm.value.id">
+                <div class="col-2 ms-2 mt-4" *ngIf="updatedSeller.id">
                     <label for="sellerId" class="form-label">ID:</label>
                     <input type="number" class="form-control" id="sellerId" formControlName="id" readonly>
                 </div>
@@ -73,6 +73,17 @@
     </form>
 
 
+    <ng-template #confirmModal let-modal>
+        <div class="modal-header text-white bg-primary">
+            <h5 class="modal-title fs-5">Confirmation</h5>
+        </div>
+        <div class="modal-body">
+            <p class="fs-5">Seller saved successfully.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close()">Close</button>
+        </div>
+    </ng-template>
 
 
 </div>

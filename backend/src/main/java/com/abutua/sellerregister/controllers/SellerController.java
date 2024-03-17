@@ -85,7 +85,6 @@ public class SellerController {
 
         // Returns a ResponseEntity with the new resource and its location (URL)
         return ResponseEntity.created(location).body(sellerResponse);
-        //TODO when a seller retuns its ID is null, maybe check this later
     }
     
 
