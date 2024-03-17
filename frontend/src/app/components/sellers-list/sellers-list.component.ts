@@ -64,14 +64,11 @@ export class SellersListComponent {
         this.modalService.open(modal).result.then(
             (confirm) => {
                 if (confirm) {
-                    this.sellerService.deleteSellerById(id).subscribe();
-
-                    /*
-                        TODO I have no idea why the method below doesn't get executed
-                        * It should display a new list without the seller deleted, by making another
-                        * Http request, but it doesn't work and I have no idea why
-                    */
-                    this.displaySellers();
+                    this.sellerService.deleteSellerById(id).subscribe({
+                        next: () => {
+                            this.displaySellers(); // reloads the list if the delete request is successfull
+                        }
+                    });
                 }
             }
         );
