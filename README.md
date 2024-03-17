@@ -24,9 +24,9 @@ Clone the repository through the link: https://github.com/Wilson-Barbosa/seller-
 
 ## Runnig the Spring API
 
-Open the cloned project on vscode. Navigate to the `backend` and from there follow the path `src\main\java\com\abutua\sellerregister\SellerRegisterApplication.java`
+Open the cloned project on vscode and navigate to the `backend` folder. From there follow the path `src\main\java\com\abutua\sellerregister\SellerRegisterApplication.java`
 
-Open the file `SellerRegisterApplication.java` and click on `run` to start the application. After the application is served it's ready to receive requests.
+Open the file `SellerRegisterApplication.java` and click on `run` to start the application. When the application is served then it's ready to receive requests.
  
 ## Running the Angular Application
 Navigate to the `frontend` folder and open a terminal there. Run the command `npm install` to install all node dependecies required.
