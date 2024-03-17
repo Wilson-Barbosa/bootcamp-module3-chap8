@@ -31,7 +31,7 @@ Open the file `SellerRegisterApplication.java` and click on `run` to start the a
 ## Running the Angular Application
 Navigate to the `frontend` folder and open a terminal there. Run the command `npm install` to install all node dependecies required.
 
-When that is done run, within the same terminal, enter `ng serve --open` to run the dev server. After this process is done a window on you browser should open, but in case that doesn't happen just go to `http://localhost:4200/`
+When NPM finishes intalling all packages, within the same terminal, enter `ng serve --open` to run the dev server. After this process is done a window on you browser should open, but in case that doesn't happen just go to `http://localhost:4200/`
 
 ## Observations
 It's very important to run the the Spring API before the angular server or else any request to save, update, delete or retrive information by Angular will fail.
