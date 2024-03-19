@@ -24,6 +24,7 @@
                 <!-- Errors -->
                 <div *ngIf="saveWasClicked && sellerForm.invalid">
                     <small class="text-danger" *ngIf="salary.errors?.['required']">*A salary is required</small>
+                    <small class="text-danger" *ngIf="salary.errors?.['min']">A salary must be higher than zero</small>
                 </div>
             </div>
 

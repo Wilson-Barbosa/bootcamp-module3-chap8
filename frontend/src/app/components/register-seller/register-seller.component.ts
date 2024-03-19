@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Seller } from 'src/app/Interfaces/Seller';
 import { SelerWithId } from 'src/app/Interfaces/SelerWithId';
@@ -24,6 +24,11 @@ export class RegisterSellerComponent implements OnChanges {
     // Tracks whether or not save was clicked by the user
     saveWasClicked: boolean = false;
 
+
+    @Output()
+    clearFather = new EventEmitter();
+
+
     // FormGroup Object containing a list of FormControls
     sellerForm = new FormGroup({
         id: new FormControl(''),
@@ -45,6 +50,14 @@ export class RegisterSellerComponent implements OnChanges {
             Validators.required
         ])
     });
+
+
+
+    // Method that clears the updatedSeller inside seller-list component
+    public clearSellerObjectOnFather(){
+        // Emits the empty seller to the father
+        this.clearFather.emit();
+    }
 
 
     // When the user clicks on the save button this method is called
@@ -70,6 +83,8 @@ export class RegisterSellerComponent implements OnChanges {
             this.saveWasClicked = false;
         }
 
+        // Clears the seller Object on father component
+        this.clearSellerObjectOnFather();
 
     }
 
@@ -115,6 +130,9 @@ export class RegisterSellerComponent implements OnChanges {
         // Clears all attributes
         this.seller = {} as Seller;
         this.updatedSeller = {} as SelerWithId;
+
+        // Clears the seller Object on father component
+        this.clearSellerObjectOnFather();
     }
 
 
@@ -137,6 +155,8 @@ export class RegisterSellerComponent implements OnChanges {
             gender: this.updatedSeller.gender
         });
     }
+
+
 
 
     // Getter methods to check if there is errors on the form

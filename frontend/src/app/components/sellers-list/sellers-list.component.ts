@@ -80,4 +80,10 @@ export class SellersListComponent {
         this.updatedSeller = seller;
     }
 
+
+    // Method that "clears" the updatedSeller attribute via eventemmiter from the child
+    public resetUpdatedSeller(): void {
+        this.updatedSeller = {} as SelerWithId;
+    }
+
 }
